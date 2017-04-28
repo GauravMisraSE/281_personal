@@ -3,7 +3,7 @@ from subprocess import check_output
 from flask import Flask, request, redirect, url_for, flash, render_template
 from werkzeug.utils import secure_filename
 
-UPLOAD_FOLDER = '/home/gaurav/281_personal/'
+UPLOAD_FOLDER = '/home/ubuntu'
 ALLOWED_EXTENSIONS = set(['zip'])
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -35,10 +35,15 @@ def upload_file():
             datafile.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             folder = filename.rsplit('.', 1)[0].lower()
             print folder
+	    print (check_output(['pwd']))
+            cngd =  os.chdir("/home/ubuntu")
+	    print (os.getcwd())
+	    #c2 = check_output(['cd', 'home/ubuntu'])
             make_folder = check_output(['mkdir', folder])
             out1 = check_output(['unzip', filename, '-d', folder])
-            cd =  check_output(['cd', 'parser'])
-            execute = check_output(['./umlparser.sh', '../', folder])
+	    print "here"
+	    cd2 = os.chdir("/home/ubuntu/parser")
+            execute = check_output(['./umlparser.sh', '/home/ubuntu/', folder])
             return filename.capitalize()
             #return render_template('front.html')
             #return redirect(url_for('upload_file'))
@@ -46,4 +51,4 @@ def upload_file():
         else:
             return "Unexpected file attached"
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=5001, debug=True)
