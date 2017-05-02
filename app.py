@@ -1,9 +1,10 @@
+from shutil import move
 import os
 from subprocess import check_output
 from flask import Flask, request, redirect, url_for, flash, render_template
 from werkzeug.utils import secure_filename
 
-UPLOAD_FOLDER = '/home/ubuntu'
+UPLOAD_FOLDER = '/home/ubuntu/281_personal'
 ALLOWED_EXTENSIONS = set(['zip'])
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -14,7 +15,7 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=(['POST'])
 def upload_file():
     if request.method == 'POST':
         # check if the post request has the file part
@@ -36,14 +37,15 @@ def upload_file():
             folder = filename.rsplit('.', 1)[0].lower()
             print folder
 	    print (check_output(['pwd']))
-            cngd =  os.chdir("/home/ubuntu")
+            cngd =  os.chdir("/home/ubuntu/281_personal")
 	    print (os.getcwd())
 	    #c2 = check_output(['cd', 'home/ubuntu'])
             make_folder = check_output(['mkdir', folder])
             out1 = check_output(['unzip', filename, '-d', folder])
 	    print "here"
-	    cd2 = os.chdir("/home/ubuntu/parser")
-            execute = check_output(['./umlparser.sh', '/home/ubuntu/', folder])
+	    cd2 = os.chdir("/home/ubuntu/281_personal/parser")
+            execute = check_output(['./umlparser.sh', '/home/ubuntu/281_personal'+ folder, folder])
+	    copier = move('/home/ubuntu/281_personal/parser'+folder+'.png','/home/ubuntu/281_personal/static/img/')
             return filename.capitalize()
             #return render_template('front.html')
             #return redirect(url_for('upload_file'))
@@ -51,4 +53,4 @@ def upload_file():
         else:
             return "Unexpected file attached"
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5001, debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
