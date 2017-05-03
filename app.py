@@ -44,8 +44,8 @@ def upload_file():
             cd2 = os.chdir("/home/ubuntu/281_personal/parser")
             check_output(['./umlparser.sh', '/home/ubuntu/281_personal/'+ folder + '/', folder])
             copy('/home/ubuntu/281_personal/parser/'+folder+'.png','/home/ubuntu/281_personal/static/img/')
-            return filename.capitalize()
-            #return render_template('front.html')
+            #return filename.capitalize()
+            return render_template('diagram.html')
             #return redirect(url_for('upload_file'))
             #return "file successfully saved"
         else:
