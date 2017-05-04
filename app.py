@@ -1,7 +1,8 @@
-from shutil import move,copy
+from flask import session
+from shutil import move,copy,rmtree
 import os
 from subprocess import check_output
-from flask import Flask, request, redirect, url_for, flash, render_template
+from flask import Flask, request, redirect, url_for, flash, render_template,send_file
 from werkzeug.utils import secure_filename
 
 UPLOAD_FOLDER = '/home/ubuntu/281_personal'
@@ -19,11 +20,11 @@ def allowed_file(filename):
 def upload_file():
     if request.method == 'POST':
         # check if the post request has the file part
-        if 'datafile' not in request.files:
+        if 'file' not in request.files:
             flash('No file part')
             return "No file found"
             # return redirect(request.url)
-        datafile = request.files['datafile']
+        datafile = request.files['file']
         # if user does not select file, browser also
         # submit a empty part without filename
         if datafile.filename == '':
@@ -43,15 +44,31 @@ def upload_file():
             print 'unzipping done'
             cd2 = os.chdir("/home/ubuntu/281_personal/parser")
             check_output(['./umlparser.sh', '/home/ubuntu/281_personal/'+ folder + '/', folder])
-            copy('/home/ubuntu/281_personal/parser/'+folder+'.png','/home/ubuntu/281_personal/static/img/')
-            #return filename.capitalize()
-            return render_template('diagram.html')
+            copy('/home/ubuntu/281_personal/parser/'+folder+'.png','/home/ubuntu/281_personal/static/')
+	    cd3 = os.chdir("/home/ubuntu/281_personal")
+            return (folder+'.png',{'Access-Control-Allow-Origin':'*'})
+	    #return "http://52.10.23.13:5000/static/img/"+folder+".png"
+	    #return filename.capitalize()
+            #return render_template('diagram.html',img = folder+'.png')
             #return redirect(url_for('upload_file'))
             #return "file successfully saved"
         else:
             return "Unexpected file attached"
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
 
+
+@app.route('/view/<string:imgname>', methods = (['GET']))
+def getimage(imgname):
+    #folder = imgname.rsplit('.', 1)[0].lower()
+    #rmtree('/'+folder)
+    url = '/home/ubuntu/281_personal/static/'+imgname
+    return send_file(url, mimetype='image/png')
+
+
+
+
+if __name__ == "__main__":
+    app.secret_key = 'super secret key'
+    app.config['SESSION_TYPE'] = 'filesystem'
+    app.run(host="0.0.0.0", port=5000, debug=True)
 
 

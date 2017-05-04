@@ -6,6 +6,6 @@
 </head>
 
 <body>
-    <img src="/home/ubuntu/281_personal/static/{{img}}" alt = "Image" id="g"/>
+    
 </body>
 </html>                        
