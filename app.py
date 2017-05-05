@@ -2,7 +2,7 @@ from flask import session
 from shutil import move,copy,rmtree
 import os
 from subprocess import check_output
-from flask import Flask, request, redirect, url_for, flash, render_template,send_file
+from flask import Flask, request, redirect, url_for, flash, render_template,send_file,make_response,Response
 from werkzeug.utils import secure_filename
 
 UPLOAD_FOLDER = '/home/ubuntu/281_personal'
@@ -61,10 +61,17 @@ def getimage(imgname):
     #folder = imgname.rsplit('.', 1)[0].lower()
     #rmtree('/'+folder)
     url = '/home/ubuntu/281_personal/static/'+imgname
-    return send_file(url, mimetype='image/png')
-
-
-
+    #response = make_response(send_file(url))
+    #response.headers.add("Access-Control-Allow-Origin", "*")
+    #response = Response(response=send_file(url, mimetype='image/png'),status= 200, headers={'Access-Control-Allow-Origin': '*'}, mimetype='image/png')
+    #return response  
+    
+    response = make_response(send_file(url, mimetype='image/png'))
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    return response
+    #return ((send_file(url, mimetype='image/png')),{'Access-Control-Allow-Origin':'*'})
+    #response = Response(response = send_file(url),status = 200, {'Access-Control-Allow-Origin': '*'})
+    #return send_file(url, mimetype='image/png'), 200, {'Access-Control-Allow-Origin': '*'}
 
 if __name__ == "__main__":
     app.secret_key = 'super secret key'
