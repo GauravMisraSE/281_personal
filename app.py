@@ -16,8 +16,10 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-@app.route('/', methods = (['POST']))
+@app.route('/', methods = (['POST','GET']))
 def upload_file():
+    if request.method == 'GET':
+	return "Instance is healthy"
     if request.method == 'POST':
         # check if the post request has the file part
         if 'file' not in request.files:
@@ -46,6 +48,11 @@ def upload_file():
             check_output(['./umlparser.sh', '/home/ubuntu/281_personal/'+ folder + '/', folder])
             copy('/home/ubuntu/281_personal/parser/'+folder+'.png','/home/ubuntu/281_personal/static/')
 	    cd3 = os.chdir("/home/ubuntu/281_personal")
+	    rmtree("home/ubuntu/281_personal/test1",ignore_errors=True)
+	    rmtree("home/ubuntu/281_personal/test2",ignore_errors=True)
+	    rmtree("home/ubuntu/281_personal/test3",ignore_errors=True)
+	    rmtree("home/ubuntu/281_personal/test4",ignore_errors=True)
+	    rmtree("home/ubuntu/281_personal/test5",ignore_errors=True) 
             return (folder+'.png',{'Access-Control-Allow-Origin':'*'})
 	    #return "http://52.10.23.13:5000/static/img/"+folder+".png"
 	    #return filename.capitalize()
