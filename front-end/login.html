@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <title>
+            Grader Login
+        </title>
+        <script>
+            function validateForm() {
+                var user = document.getElementById('uname').value;
+                var pass = document.getElementById('password').value;
+                console.log(user);
+                console.log(pass);
+                if(user == 'admin' && pass == 'admin')
+                {
+                   sessionStorage.umaster = 'true';
+                   window.location.href = "http://ec2-52-10-224-75.us-west-2.compute.amazonaws.com/index.html";
+
+                }
+                else{
+                alert("Invalid user or password");
+                }
+
+            }
+        </script>
+    </head>
+
+    <body>
+        <h1>
+            Login to UML Parser Grading portal
+        </h1>
+
+        User name:<br>
+        <input type="text" id = "uname" name="firstname"><br>
+        Password:<br>
+        <input type="password" id = "password" name="lastname">
+        <input type="submit" value="Submit" onclick="validateForm()">
+
+
+
+
+    </body>
+</html>

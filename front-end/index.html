@@ -1,0 +1,77 @@
+<html xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="utf-8"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src = "ang.js"></script>
+    <link rel="stylesheet" type="text/css" href="mystyle.css">
+</head>
+
+<body>
+    <h1>Welcome to Java UML Parser Online Grading Portal</h1>
+    <div ng-app = "myApp" ng-controller = "myCtrl" ng-init = "switch = true;hidden = true">
+        <button class="button" ng-click = "refresher()">Refresh</button>
+        <p>
+        Select a tenant:<br>
+        </p>
+
+        <input type="radio"  ng-model = "tenanturl" value="Binoy"> Binoy<br>
+        <input type="radio"  ng-model = "tenanturl" value="Kaushik"> Kaushik<br>
+        <input type="radio"  ng-model = "tenanturl" value="Apoorva"> Apoorva<br>
+        <input type="radio"  ng-model = "tenanturl" value="Harshit"> Harshit<br>
+        <br>
+        <div>
+            currently selected: {{uploadUrl}}
+        </div>
+        <button class="button" ng-click = "submitForm()">Select Tenent</button>
+        <br><br>
+        <input type="file" id = "file" name = "file" class="inputfile" file-model="myFile"/>
+        <label for="file">Choose a file</label>
+        <br><br>
+        <button class="button" ng-click="uploadFile()">upload me</button>
+        <br><br>
+        <p>
+            <button class="button" ng-click = "viewFile()" ng-disabled="switch">View Diagram!</button>
+        </p>
+
+        <div ng-hide = "hidden">
+            <a href="{{imglink}}" target="_blank">View Diagram</a>
+        </div>
+
+        <div id = common_attributes ng-hide = "hidden">
+            Marks<br>
+            <input type="number" ng-model = "remarks.col1" min="0" max="100"><br>
+            Is the solution complete?<br>
+            <input type="radio"  ng-model = "remarks.col2" value="true"> True<br>
+            <input type="radio" ng-model = "remarks.col2" value="false"> False<br>
+            Please provide some comments for this solution:<br>
+            <textarea ng-model = "remarks.col3" rows="4" cols="50"></textarea>
+        </div>
+
+        <div id="Binoy" ng-hide = "hidebinoy">
+            Did the solution pass your test case?<br>
+            <input type="radio"  ng-model = "remarks.col4" value="true"> True<br>
+            <input type="radio"  ng-model = "remarks.col4" value="false"> False<br>
+        </div>
+
+        <div id="Kaushik" ng-hide = "hidekaushik">
+            Please provide some improvements for this solution:<br>
+            <textarea  ng-model = "remarks.col4" rows="4" cols="50"></textarea><br>
+            Any drawbacks?<br>
+            <textarea ng-model = "remarks.col5" rows="4" cols="50"></textarea>
+        </div>
+
+        <div id="Harshit" ng-hide = "hideharshit">
+            Provide next challenge for Harshit:<br>
+            <textarea  ng-model = "remarks.col4" rows="4" cols="50"></textarea><br>
+        </div>
+
+        <button class="button" ng-hide = "hidden" ng-click = "submitFeedback()">Submit feedback</button>
+        <br><br><br><br>
+
+        <button class="button" ng-click = "logout()">Logout</button>
+    </div>
+
+</body>
+
+</html>
