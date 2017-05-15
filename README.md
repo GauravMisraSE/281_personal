@@ -7,14 +7,14 @@
 #### Application Login page URI:
 http://ec2-52-10-224-75.us-west-2.compute.amazonaws.com/login.html
 
-VPC name: personal
-AZs:  us-west-2a, us-west-2b
+VPC name: personal, located in Oregon region  
+AZs:  us-west-2a, us-west-2b  
 
-#### Tenants:
-Harshit Agarwal
-Kaushik Shingne
-Binoy Michael Prakash
-Apoorva Maheshwari
+#### Tenants:  
+Harshit Agarwal  
+Kaushik Shingne  
+Binoy Michael Prakash  
+Apoorva Maheshwari  
 
 #### Load balancer config:
 Port 80: Binoy's target group  
