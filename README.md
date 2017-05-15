@@ -33,7 +33,10 @@ t-kaushik: Kaushik's table, contains 2 custom comments: IMPROVEMENTS, DRAWBACKS.
 
 #### Data Multi-tenancy:  
 Each tenant table has 3 common graading attributes namely MARKS, COMPLETE OR INCOMPLETE and COMMENTS. Besides that, Binoy also has a custom field TEST-PASSED, Kaushik has 2 custom fields DRAWBACKS, IMPROVEMENTS, and Harshit has one custom field CHALLENGES.  
-The schema can be extended freely to add/modify fields for specific tenants with minimal changes to the code.  
+The schema can be extended freely to add/modify fields for specific tenants with minimal changes to the code.   
+  
+#### Youtube demonstration video link:  
+https://www.youtube.com/watch?v=BGl4C35GmHc&feature=youtu.be  
 
 ### NOTE: I've used my friends AWS account for this project, so the Demonstration video contains the name Sanjot Saini on AWS console. I've done complete implementation from scratch.   
 
